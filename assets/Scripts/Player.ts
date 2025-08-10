@@ -1,4 +1,4 @@
-import { _decorator, Component, EventTouch, EventKeyboard, Input, input, Node, UITransform, view, KeyCode, Prefab, instantiate } from 'cc';
+import { _decorator, Component, EventTouch, EventKeyboard, Input, input, Node, UITransform, view, KeyCode, Prefab, instantiate, log } from 'cc';
 const { ccclass, property } = _decorator;
 
 enum ShootType {
@@ -34,15 +34,31 @@ export class Player extends Component {
     shootRate: number = 0.15
     shootTimer: number = 0
 
-    /**子弹预制体1 */
+    /**子弹类型 */
+    @property
+    shootType: ShootType = ShootType.OrdinaryBullets;
+
+    /**子弹预制体1 普通子弹*/
     @property(Prefab)
-    bullet1Prefab: Prefab = null
+    bullet1Prefab1: Prefab = null
+    /**子弹预制体2 高级子弹 */
+    @property(Prefab)
+    bullet1Prefab2: Prefab = null
+
+
+    /**子弹发射位置 */
     @property(Node)
     bullet1Position: Node = null
 
+    /**子弹发射节点 */
     @property(Node)
     bulletParent: Node = null
 
+
+    /**玩家节点宽度 */
+    airplaneWidth:number = 0
+    /**玩家节点高度 */
+    airplaneHeight:number = 0
 
     start() {
         this.nodeArea = this.node.getComponent(UITransform);
@@ -52,6 +68,8 @@ export class Player extends Component {
 
         const airplaneWidth = (this.nodeArea?.width ?? 0) * this.node.scale.x;
         const airplaneHeight = (this.nodeArea?.height ?? 0) * this.node.scale.y;
+        this.airplaneWidth = airplaneWidth
+        this.airplaneHeight = airplaneHeight
         const allowableError1 = Math.floor(airplaneWidth * 0.33);
 
         this.leftBorder = -(this.visibleWidth / 2) + allowableError1;
@@ -132,9 +150,61 @@ export class Player extends Component {
         }
         this.shootTimer = 0
 
-        const bullet1 = instantiate(this.bullet1Prefab)
+        switch (this.shootType) {
+            case ShootType.OrdinaryBullets:
+                this.fireOrdinaryBullets();
+                break;
+            case ShootType.AdvancedBullets:
+                this.fireAdvancedBullets();
+                break;
+            case ShootType.TrackingBullets:
+                this.fireTrackingBullets();
+                break;
+            case ShootType.CrazyBullet:
+                this.fireCrazyBullets();
+                break;
+            default:
+                log("未知的子弹类型");
+                break;
+        }
+
+    }
+
+
+    /**发射普通子弹 */
+    fireOrdinaryBullets() {
+        const bullet1 = instantiate(this.bullet1Prefab1)
 
         this.bulletParent.addChild(bullet1)
         bullet1.setWorldPosition(this.bullet1Position.worldPosition)
+    }
+
+    /**发射高级子弹 */
+    fireAdvancedBullets() {
+        const bullet1 = instantiate(this.bullet1Prefab2)
+        const bullet2 = instantiate(this.bullet1Prefab2)
+
+        this.bulletParent.addChild(bullet1)
+        this.bulletParent.addChild(bullet2)
+        const bullet1Position = this.bullet1Position.worldPosition.clone()
+        const bullet2Position = this.bullet1Position.worldPosition.clone()
+        bullet2Position.x += this.airplaneWidth * 0.25
+        bullet1Position.x -= this.airplaneWidth * 0.25
+        bullet1.setWorldPosition(bullet1Position)
+        bullet2.setWorldPosition(bullet2Position)
+    }
+    
+    /**发射追踪子弹 */
+    fireTrackingBullets() {
+
+    }
+    
+    /**发射疯狂子弹 */
+    fireCrazyBullets() {
+    }
+
+    /**设置子弹类型 */
+    setShootType(type: ShootType) {
+        this.shootType = type;
     }
 }

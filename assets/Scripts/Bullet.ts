@@ -4,7 +4,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Bullet')
 export class Bullet extends Component {
     @property
-    speed:number = 500
+    speed:number = 850
     start() {
 
     }

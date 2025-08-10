@@ -1,8 +1,11 @@
 import { _decorator, Component, Node, view } from 'cc';
+import { ShootType } from './Player';
 const { ccclass, property } = _decorator;
 
 @ccclass('Bullet')
 export class Bullet extends Component {
+    shootType: ShootType = ShootType.OrdinaryBullets
+
     @property
     speed: number = 850
     

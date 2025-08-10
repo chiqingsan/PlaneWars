@@ -1,12 +1,13 @@
 import { _decorator, Component, EventTouch, EventKeyboard, Input, input, Node, UITransform, view, KeyCode, Prefab, instantiate, log } from 'cc';
+import { Bullet } from './Bullet';
 const { ccclass, property } = _decorator;
 
-enum ShootType {
+export enum ShootType {
     /**普通子弹 */
     OrdinaryBullets,
     /**高级子弹 */
     AdvancedBullets,
-    /**高级子弹 */
+    /**追踪子弹 */
     TrackingBullets,
     /**疯狂子弹 */
     CrazyBullet
@@ -174,7 +175,8 @@ export class Player extends Component {
     /**发射普通子弹 */
     fireOrdinaryBullets() {
         const bullet1 = instantiate(this.bullet1Prefab1)
-
+        bullet1.getComponent(Bullet).shootType = ShootType.OrdinaryBullets
+        
         this.bulletParent.addChild(bullet1)
         bullet1.setWorldPosition(this.bullet1Position.worldPosition)
     }
@@ -183,6 +185,7 @@ export class Player extends Component {
     fireAdvancedBullets() {
         const bullet1 = instantiate(this.bullet1Prefab2)
         const bullet2 = instantiate(this.bullet1Prefab2)
+        bullet1.getComponent(Bullet).shootType = ShootType.AdvancedBullets
 
         this.bulletParent.addChild(bullet1)
         this.bulletParent.addChild(bullet2)

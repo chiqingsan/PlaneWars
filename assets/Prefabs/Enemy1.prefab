@@ -29,15 +29,18 @@
       },
       {
         "__id__": 12
+      },
+      {
+        "__id__": 14
       }
     ],
     "_prefab": {
-      "__id__": 14
+      "__id__": 16
     },
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": -90.339,
-      "y": 476.984,
+      "y": 475.005,
       "z": 0
     },
     "_lrot": {
@@ -212,7 +215,10 @@
         "__expectedType__": "cc.AnimationClip"
       }
     ],
-    "_defaultClip": null,
+    "_defaultClip": {
+      "__uuid__": "5122cd56-1ab4-456c-87d8-a1c46bf34f53",
+      "__expectedType__": "cc.AnimationClip"
+    },
     "_id": ""
   },
   {
@@ -272,6 +278,7 @@
     "__prefab": {
       "__id__": 13
     },
+    "hp": 3,
     "anim": {
       "__id__": 7
     },
@@ -283,6 +290,72 @@
     "fileId": "7cm42UahJExbFPC7TqbEFV"
   },
   {
+    "__type__": "cc.PolygonCollider2D",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 15
+    },
+    "tag": 0,
+    "_group": 1,
+    "_density": 1,
+    "_sensor": false,
+    "_friction": 0.2,
+    "_restitution": 0,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_points": [
+      {
+        "__type__": "cc.Vec2",
+        "x": -8.5,
+        "y": -44.7
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -34.6,
+        "y": -17.2
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -34.5,
+        "y": 14.5
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -0.2,
+        "y": 42.3
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 34.6,
+        "y": 13.7
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 34.7,
+        "y": -17
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 8.8,
+        "y": -44.8
+      }
+    ],
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "90qC5RDbRPop7NNLTAuJYO"
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -291,6 +364,6 @@
       "__id__": 0
     },
     "fileId": "54iEeNWVBBIYOgaxRTtlIK",
-    "targetOverrides": null
+    "targetOverrides": []
   }
 ]
